@@ -1,0 +1,75 @@
+/* BLOCKS */
+
+header {
+    /* positioning */
+    /* display & box model */
+    /* color */
+    /* text */
+    /* text */
+    /* other */
+}
+
+main {
+    /* nothing yet */
+}
+
+#library-app {
+    max-width: 75%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+footer {
+    /* positioning */
+    position: absolute;
+    bottom: 0;
+
+    /* display & box model */
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+
+    /* color */
+
+    /* text */
+    text-align: center;
+
+    /* other */
+}
+
+/* ELEMENTS */
+
+h1 {
+    padding: 5px;
+
+    font-size: 30px;
+}
+
+th, td {
+    padding: 15px;
+    border-bottom: 1px solid darkgrey;
+
+    text-align: center;
+}
+
+input::placeholder {
+    text-align: center;
+}
+
+#add-pages {
+    width: 40px;
+}
+
+/* MODIFIERS */
+
+.inline-wrapper {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.input-200 {
+    width: 200px;
+}

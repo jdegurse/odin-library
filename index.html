@@ -9,8 +9,60 @@
     <link rel="stylesheet" href="/static/css/main.css">
 </head>
 <body>
-    
-
+    <header>
+        <h1>My Library Project</h1>
+    </header>
+    <main>
+        <div id="library-app">
+            <div id="add-book">
+                <form id="add-book-form">
+                    <input class="input-200" id="add-title" type="text" placeholder="Title">
+                    <input class="input-200" id="add-author" type="text" placeholder="Author">
+                    <input id="add-pages" type="text" placeholder="Pages">
+                    <div class="inline-wrapper">
+                        <input type="checkbox" name="add-read" id="add-read">
+                        <label for="add-read">Read</label>
+                    </div>
+                    <input type="submit" value="Add Book">
+                </form>
+            </div>
+            <div id="book-table">
+                <table>
+                    <tr>
+                        <th class="title">Title</th>
+                        <th class="author">Author</th>
+                        <th class="pages">Pages</th>
+                        <th class="read">Read</th>
+                        <th class="delete">Delete</th>
+                    </tr>
+                    <tr>
+                        <td class="title">Harry Potter and the Philosopher's Stone</th>
+                        <td class="author">J.K. Rowling</th>
+                        <td class="pages">223</th>
+                        <td class="read">Read</th>
+                        <td class="delete">Delete</th>
+                    </tr>
+                    <tr>
+                        <td class="title">The Hobbit</th>
+                        <td class="author">J.R.R. Tolkien</th>
+                        <td class="pages">310</th>
+                        <td class="read">Not Read</th>
+                        <td class="delete">Delete</th>
+                    </tr>
+                    <tr>
+                        <td class="title">Airframe</th>
+                        <td class="author">Michael Crichton</th>
+                        <td class="pages">352</th>
+                        <td class="read">Read</th>
+                        <td class="delete">Delete</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>Created by James DeGurse for the Odin Project</p>
+    </footer>
     <script src="/static/js/app.js"></script>
 </body>
 </html>
