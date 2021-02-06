@@ -15,16 +15,14 @@
     <main>
         <div id="library-app">
             <div id="add-book">
-                <form id="add-book-form">
-                    <input class="input-200" id="add-title" type="text" name="title" placeholder="Title">
-                    <input class="input-200" id="add-author" type="text" name="author" placeholder="Author">
-                    <input id="add-pages" type="text" name="pages" placeholder="Pages">
-                    <div class="inline-wrapper">
-                        <input type="checkbox" name="read" id="add-read">
-                        <label for="add-read">Read</label>
-                    </div>
-                    <input type="submit" value="Add Book">
-                </form>
+                <input class="input-200" id="add-title" type="text" placeholder="Title">
+                <input class="input-200" id="add-author" type="text" placeholder="Author">
+                <input id="add-pages" type="text" placeholder="Pages">
+                <div class="inline-wrapper">
+                    <input id="add-read" type="checkbox" name="read">
+                    <label for="add-read">Read</label>
+                </div>
+                <button id="add-submit">Add Book</button>
             </div>
             <div id="book-table">
                 <table>
