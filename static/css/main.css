@@ -14,7 +14,7 @@ main {
 }
 
 #library-app {
-    width: 100%;
+    width: 75vw;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
@@ -47,12 +47,23 @@ h1 {
     font-size: 30px;
 }
 
-th, td {
-    padding: 15px;
-    border-bottom: 1px solid darkgrey;
+table {
+    width: 100%;
+}
 
+th, td {
+    padding: 10px;
+    border-bottom: 1px solid darkgrey;
     text-align: center;
     vertical-align: middle;
+}
+
+th.th-read {
+    width: 87px;
+}
+
+th.th-delete {
+    width: 30px;
 }
 
 input::placeholder {
