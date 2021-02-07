@@ -31,7 +31,13 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary(title, author, pages, read) {
-    library.push(new Book(title, author, pages, read))
+    const new_book = new Book(title, author, pages, read);
+    library.push(new_book);
+    createRow(
+        document.getElementById('book-table'),
+        new_book,
+        library.length - 1
+    )
 }
 
 function submitClick() {
@@ -61,10 +67,9 @@ function invalidEntryWarning() {
 
 ////////    TABLE CREATION    ////////
 function createTable() {
-    const table = document.getElementById('book-table');
     // iterate through the library array
     for (i = 0; i < library.length; i++) {
-        createRow(table, library[i], i)
+        createRow(document.getElementById('book-table'), library[i], i)
     }
 }
 
@@ -90,7 +95,7 @@ function createReadButton(row, object, i) {
     }
 }
 
-function createDeleteButton(row, object, i) {
+function createDeleteButton(row, i) {
     row.insertCell(4).innerHTML =
         `<button class="delete-button" data-index="${i}">Delete</button>`;
 }
@@ -122,6 +127,7 @@ function readButtonFlip(button) {
         button.textContent = 'Read';
     }
 }
+
 
 
 ////////    ON LOAD    ////////
