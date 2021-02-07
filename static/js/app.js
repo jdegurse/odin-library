@@ -31,6 +31,10 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary(title, author, pages, read) {
+    // creates a book using the constructor, then pushes it to the end of the
+    // library array
+    // can change the push function to unshift to add books to the front of the
+    // array but would then need to reassign data indexes here
     const new_book = new Book(title, author, pages, read);
     library.push(new_book);
     createRow(
@@ -41,20 +45,26 @@ function addBookToLibrary(title, author, pages, read) {
 }
 
 function submitClick() {
+    // takes the values from each input field and sends them to the
+    // addBookToLibrary function so a book can be constructed
     let title = document.getElementById('add-title');
     let author = document.getElementById('add-author');
     let pages = document.getElementById('add-pages');
     let read = document.getElementById('add-read');
+    // validate the values, and if invalid, warn the user and return the
+    // function here
     if (title.value === '' || author.value === '' || pages.value === '') {
         invalidEntryWarning();
         return;
     }
+    // if valid, the book is added
     addBookToLibrary(
         title.value,
         author.value,
         pages.value,
         read.checked
     );
+    // the input fields are all reset to their default placeholders
     title.value = author.value = pages.value = '';
     read.checked = false;
 }
@@ -90,27 +100,33 @@ function createRow(table, object, i) {
 ////////    READ BUTTON    ////////
 
 function createReadButton(object, i) {
+    // creates a new button
     let new_button = document.createElement('button');
     new_button.setAttribute('data-index', i);
+    // if read has been checked, assign the read values
     if (object.read === true) {
         new_button.textContent = 'Read';
         new_button.setAttribute('class', 'read-button is-read');
     }
+    // if not, set the not read values
     else {
         new_button.textContent = 'Not Read';
         new_button.setAttribute('class', 'read-button is-not-read');
     }
+    // add an event listener for the button
     new_button.addEventListener('click', readClick);
     return new_button;
 }
 
 function readClick() {
+    // flip the value of the read key in the library
     const i = this.getAttribute('data-index');
     library[i].read = !library[i].read;
     readButtonFlip(this);
 }
 
 function readButtonFlip(button) {
+    // flip the is-/not-/read class as well as the text content
     button.classList.toggle('is-read');
     button.classList.toggle('is-not-read');
     if (button.textContent === 'Read') {
@@ -134,23 +150,32 @@ function createDeleteButton(i) {
 }
 
 function deleteClick() {
+    // takes the data index and splices the library at that index for 1 item
     const i = this.getAttribute('data-index');
     library.splice(i, 1);
+    // deletes the row and reassigns data indices on all buttons so they match
+    // the new indices in the library
     deleteRow(i);
     reassignDataIndex();
 }
 
 function deleteRow(i) {
+    // finds the delete button's grandparent node (ie. the table row) and
+    // deletes the row
     let delete_button = document.querySelector(`[data-index="${i}"]`);
     let row = delete_button.parentNode.parentNode;
     document.getElementById('book-table').deleteRow(row.rowIndex);
 }
 
 function reassignDataIndex() {
+    // creates an array of delete buttons and an array of read buttons
     let delete_buttons =
         Array.from(document.getElementsByClassName('delete-button'))
     let read_buttons =
         Array.from(document.getElementsByClassName('read-button'))
+    // for every row (denoted by the delete button in the row), set the
+    // data index of each delete and read button to the current index of the
+    // iteration
     for (i = 0; i < delete_buttons.length; i++) {
         delete_buttons[i].setAttribute('data-index', i);
         read_buttons[i].setAttribute('data-index', i)
