@@ -58,18 +58,10 @@ input::placeholder {
     text-align: center;
 }
 
-#add-pages {
-    width: 40px;
-}
-
 /* MODIFIERS */
 
 .inline-wrapper {
     margin: 0;
     padding: 0;
     display: inline-block;
-}
-
-.input-200 {
-    width: 200px;
 }
