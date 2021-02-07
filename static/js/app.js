@@ -129,7 +129,13 @@ function createDeleteButton(i) {
     new_button.setAttribute('class', 'delete-button')
     new_button.setAttribute('data-index', i)
     new_button.textContent = 'Delete'
+    new_button.addEventListener('click', deleteClick);
     return new_button;
+}
+
+function deleteClick() {
+    const i = this.getAttribute('data-index');
+    library.splice(i, 1);
 }
 
 
