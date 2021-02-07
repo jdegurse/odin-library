@@ -81,12 +81,8 @@ function createRow(table, object, i) {
     row.insertCell(1).textContent = object.author;
     row.insertCell(2).textContent = object.pages;
     row.insertCell(3).appendChild(createReadButton(object, i))
-    createDeleteButton(row, object, i)
-}
-
-function createDeleteButton(row, i) {
-    row.insertCell(4).innerHTML =
-        `<button class="delete-button" data-index="${i}">Delete</button>`;
+    row.insertCell(4).appendChild(createDeleteButton(i))
+    //createDeleteButton(row, object, i)
 }
 
 
@@ -127,8 +123,19 @@ function readButtonFlip(button) {
 
 
 
+////////    DELETE BUTTON    ////////
+function createDeleteButton(i) {
+    let new_button = document.createElement('button');
+    new_button.setAttribute('class', 'delete-button')
+    new_button.setAttribute('data-index', i)
+    new_button.textContent = 'Delete'
+    return new_button;
+}
+
+
+
+
 ////////    ON LOAD    ////////
 createTable()
-createReadButtonEventListeners();
 
 document.getElementById('add-submit').addEventListener('click', submitClick);
