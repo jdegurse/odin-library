@@ -64,28 +64,68 @@ function createTable() {
     const table = document.getElementById('book-table');
     // iterate through the library array
     for (i = 0; i < library.length; i++) {
-        createRow(table, library[i])
+        createRow(table, library[i], i)
     }
 }
 
-function createRow(table, object) {
+function createRow(table, object, i) {
     // create a row
     const row = table.insertRow(-1);
     // create the cells
     row.insertCell(0).textContent = object.title;
     row.insertCell(1).textContent = object.author;
     row.insertCell(2).textContent = object.pages;
-    if (object.read = true) {
-        row.insertCell(3).innerHTML = '<button>Read</button>'
+    createReadButton(row, object, i)
+    createDeleteButton(row, object, i)
+}
+
+function createReadButton(row, object, i) {
+    if (object.read === true) {
+        row.insertCell(3).innerHTML =
+            `<button class="read-button is-read" data-index="${i}">Read</button>`;
     }
     else {
-        row.insertCell(3).innerHTML = '<button>Not Read</button>'
+        row.insertCell(3).innerHTML =
+            `<button class="read-button is-not-read" data-index="${i}">Not Read</button>`;
     }
-    row.insertCell(4).innerHTML = '<button>Delete</button>'
+}
+
+function createDeleteButton(row, object, i) {
+    row.insertCell(4).innerHTML =
+        `<button class="delete-button" data-index="${i}">Delete</button>`;
 }
 
 
 
+////////    READ BUTTON    ////////
+
+function createReadButtonEventListeners() {
+    const buttons = Array.from(document.getElementsByClassName('read-button'));
+    for (i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', readClick);
+    }
+}
+
+function readClick() {
+    const i = this.getAttribute('data-index');
+    library[i].read = !library[i].read;
+    readButtonFlip(this);
+}
+
+function readButtonFlip(button) {
+    button.classList.toggle('is-read');
+    button.classList.toggle('is-not-read');
+    if (button.textContent === 'Read') {
+        button.textContent = 'Not Read';
+    }
+    else {
+        button.textContent = 'Read';
+    }
+}
+
+
 ////////    ON LOAD    ////////
 createTable()
+createReadButtonEventListeners();
+
 document.getElementById('add-submit').addEventListener('click', submitClick);
