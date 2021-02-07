@@ -136,8 +136,26 @@ function createDeleteButton(i) {
 function deleteClick() {
     const i = this.getAttribute('data-index');
     library.splice(i, 1);
+    deleteRow(i);
+    reassignDataIndex();
 }
 
+function deleteRow(i) {
+    let delete_button = document.querySelector(`[data-index="${i}"]`);
+    let row = delete_button.parentNode.parentNode;
+    document.getElementById('book-table').deleteRow(row.rowIndex);
+}
+
+function reassignDataIndex() {
+    let delete_buttons =
+        Array.from(document.getElementsByClassName('delete-button'))
+    let read_buttons =
+        Array.from(document.getElementsByClassName('read-button'))
+    for (i = 0; i < delete_buttons.length; i++) {
+        delete_buttons[i].setAttribute('data-index', i);
+        read_buttons[i].setAttribute('data-index', i)
+    }
+}
 
 
 
