@@ -80,19 +80,8 @@ function createRow(table, object, i) {
     row.insertCell(0).textContent = object.title;
     row.insertCell(1).textContent = object.author;
     row.insertCell(2).textContent = object.pages;
-    createReadButton(row, object, i)
+    row.insertCell(3).appendChild(createReadButton(object, i))
     createDeleteButton(row, object, i)
-}
-
-function createReadButton(row, object, i) {
-    if (object.read === true) {
-        row.insertCell(3).innerHTML =
-            `<button class="read-button is-read" data-index="${i}">Read</button>`;
-    }
-    else {
-        row.insertCell(3).innerHTML =
-            `<button class="read-button is-not-read" data-index="${i}">Not Read</button>`;
-    }
 }
 
 function createDeleteButton(row, i) {
@@ -104,11 +93,19 @@ function createDeleteButton(row, i) {
 
 ////////    READ BUTTON    ////////
 
-function createReadButtonEventListeners() {
-    const buttons = Array.from(document.getElementsByClassName('read-button'));
-    for (i = 0; i < buttons.length; i++) {
-        buttons[i].addEventListener('click', readClick);
+function createReadButton(object, i) {
+    let new_button = document.createElement('button');
+    new_button.setAttribute('data-index', i);
+    if (object.read === true) {
+        new_button.textContent = 'Read';
+        new_button.setAttribute('class', 'read-button is-read');
     }
+    else {
+        new_button.textContent = 'Not Read';
+        new_button.setAttribute('class', 'read-button is-not-read');
+    }
+    new_button.addEventListener('click', readClick);
+    return new_button;
 }
 
 function readClick() {
