@@ -1,24 +1,81 @@
 ////////    LIBRARY    ////////
-let library = [
-    {
-        "title": "Harry Potter and the Philosopher's Stone",
-        "author": "J.K. Rowling",
-        "pages": "223",
-        "read": true
-    },
-    {
-        "title": "The Hobbit",
-        "author": "J.R.R. Tolkien",
-        "pages": "310",
-        "read": false
-    },
-    {
-        "title": "Airframe",
-        "author": "Michael Crichton",
-        "pages": "352",
-        "read": true
+// localStorage.clear(); ////////////////////////////////////////// DEBUGGING //
+
+function loadLibrary() {
+    if (storage_available) {
+        // localStorage is available and we can use it
+        // check if library is currently stored in localStorage
+        // if no, create an array for library and save it into localStorage
+        if (!localStorage.getItem('library')) {
+            storeLibrary();
+        }
+        // if yes, load the library and parse it into a library array
+        else {
+            library = getLibrary();
+        }
     }
-]
+    else {
+        // localStorage is not available to the user, alert them that their
+        // library will not be saved
+        alert('localStorage is not enabled on your browser. '
+            + 'Entries will not be saved');
+    }
+}
+
+function storageAvailable(type) {
+    // on load check that localStorage is enabled and can accept data
+    // type should be 'localStorage' when function is called
+    var storage;
+    try {
+        storage = window[type];
+        var x = '__storage_test__';
+        storage.setItem(x, x);
+        storage.removeItem(x);
+        return true;
+    }
+    catch (e) {
+        return e instanceof DOMException && (
+            // everything except Firefox
+            e.code === 22 ||
+            // Firefox
+            e.code === 1014 ||
+            // test name field too, because code might not be present
+            // everything except Firefox
+            e.name === 'QuotaExceededError' ||
+            // Firefox
+            e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+            // acknowledge QuotaExceededError only if there's something already stored
+            (storage && storage.length !== 0);
+    }
+}
+
+function storeLibrary() {
+    // store the library array in the 'library' localStorage as a string
+    localStorage.setItem('library', JSON.stringify(library));
+}
+
+function getLibrary() {
+    // get the 'library' storage item and parse it into JSON
+    let library_string = localStorage.getItem('library');
+    return JSON.parse(library_string);
+}
+
+function saveToLibrary() {
+    // used after adding, deleting, or modifying a book
+    // MUST go after the library array is updated
+    // checks if localStorage is available
+    if (storage_available) {
+        // store the current library array in localStorate
+        storeLibrary()
+    }
+    // if not, do nothing
+    else {
+        return;
+    }
+}
+
+let library = [];
+let storage_available = storageAvailable('localStorage');
 
 
 
@@ -31,17 +88,19 @@ function Book(title, author, pages, read) {
 }
 
 function addBookToLibrary(title, author, pages, read) {
-    // creates a book using the constructor, then pushes it to the end of the
-    // library array
+    // creates a book using the constructor
+    const new_book = new Book(title, author, pages, read);
+    // push the book to the end of the library array
     // can change the push function to unshift to add books to the front of the
     // array but would then need to reassign data indexes here
-    const new_book = new Book(title, author, pages, read);
     library.push(new_book);
+    // if localStorage, save the library
+    saveToLibrary();
     createRow(
         document.getElementById('book-table'),
         new_book,
         library.length - 1
-    )
+    );
 }
 
 function submitClick() {
@@ -132,6 +191,8 @@ function readClick() {
     // flip the value of the read key in the library
     const i = this.getAttribute('data-index');
     library[i].read = !library[i].read;
+    // save the flip to localStorage
+    saveToLibrary();
     readButtonFlip(this);
 }
 
@@ -167,6 +228,8 @@ function deleteClick() {
     // the new indices in the library
     deleteRow(i);
     reassignDataIndex();
+    // save the delete to local storage
+    saveToLibrary();
 }
 
 function deleteRow(i) {
@@ -214,7 +277,8 @@ for (i = 0; i < acc.length; i++) {
 
 
 ////////    ON LOAD    ////////
-createTable()
+loadLibrary();
+createTable();
 
 document.getElementById('add-submit').addEventListener('click', submitClick);
 document.getElementById('required-field-warning')
