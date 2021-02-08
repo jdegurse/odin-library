@@ -51,10 +51,17 @@ function submitClick() {
     let author = document.getElementById('add-author');
     let pages = document.getElementById('add-pages');
     let read = document.getElementById('add-read');
+    let required_field_warning =
+        document.getElementById('required-field-warning');
+    let pages_number_warning = document.getElementById('pages-number-warning')
     // validate the values, and if invalid, warn the user and return the
     // function here
     if (title.value === '' || author.value === '' || pages.value === '') {
-        invalidEntryWarning();
+        required_field_warning.classList.remove('hidden');
+        return;
+    }
+    if (isNaN(pages.value)) {
+        pages_number_warning.classList.remove('hidden');
         return;
     }
     // if valid, the book is added
@@ -64,9 +71,12 @@ function submitClick() {
         pages.value,
         read.checked
     );
-    // the input fields are all reset to their default placeholders
+    // the input fields are all reset to their default placeholders and hide
+    // any warnings
     title.value = author.value = pages.value = '';
     read.checked = false;
+    required_field_warning.classList.add('hidden');
+    pages_number_warning.classList.add('hidden');
 }
 
 function invalidEntryWarning() {
@@ -209,9 +219,9 @@ createTable()
 document.getElementById('add-submit').addEventListener('click', submitClick);
 document.getElementById('required-field-warning')
     .addEventListener('click', function () {
-        this.classList.toggle('hidden')
+        this.classList.add('hidden')
     });
 document.getElementById('pages-number-warning')
     .addEventListener('click', function () {
-        this.classList.toggle('hidden')
+        this.classList.add('hidden')
     });
