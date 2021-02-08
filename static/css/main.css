@@ -1,15 +1,17 @@
 /* BLOCKS */
 
 header {
-    /* positioning */
-    /* display & box model */
-    /* color */
-    /* text */
-    /* text */
-    /* other */
+    margin-bottom: 20px;
+}
+
+#header-container {
+    width: 75vw;
+    margin: 0 auto;
+    padding: 10px;
 }
 
 main {
+    min-height: calc(100vh - 146px);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -44,29 +46,20 @@ main {
 }
 
 footer {
-    /* positioning */
-    position: absolute;
-    bottom: 0;
-
-    /* display & box model */
     width: 100%;
-    padding: 5px;
+    margin-top: 20px;
+    padding: 10px 5px 10px 5px;
     box-sizing: border-box;
-
-    /* color */
-
-    /* text */
     text-align: center;
-
-    /* other */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 /* ELEMENTS */
 
 h1 {
     padding: 5px;
-
-    font-size: 30px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 40px;
 }
 
 h3 {
