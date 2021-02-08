@@ -21,6 +21,11 @@ main {
     align-items: center;
 }
 
+#add-book {
+    margin: 10px 0px 20px 0px;
+    background-color: lightblue;
+}
+
 footer {
     /* positioning */
     position: absolute;
@@ -70,7 +75,7 @@ input::placeholder {
     text-align: center;
 }
 
-button.read-button, button.delete-button, button#add-submit {
+button {
     height: 30px;
     padding: 0;
     margin: 0;
@@ -83,6 +88,7 @@ button.read-button, button.delete-button, button#add-submit {
     font-weight: bold;
     text-align: center;
     vertical-align: middle;
+    cursor: pointer;
 }
 
 button:active {
@@ -120,27 +126,21 @@ button:active {
 
 /* Style the buttons that are used to open and close the accordion panel */
 .accordion {
-    background-color: #eee;
-    color: #444;
-    cursor: pointer;
-    padding: 18px;
-    width: 100%;
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    width: 130px;
+    margin: 10px 0px 10px 0px;
+    background-color: rgb(79, 168, 79);
+    color: white;
     text-align: center;
-    border: none;
-    outline: none;
     transition: 0.4s;
 }
   
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active, .accordion:hover {
-    background-color: #ccc;
+button.active {
+    box-shadow: inset 0px 0px 5px -2px black;
 }
   
 /* Style the accordion panel. Note: hidden by default */
 .panel {
-    padding: 0 18px;
-    background-color: lightblue;
     max-height: 0;
     overflow: hidden;
     transition: max-height 0.2s ease-out;
