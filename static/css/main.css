@@ -21,9 +21,26 @@ main {
     align-items: center;
 }
 
+.panel {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+}
+
 #add-book {
     margin: 10px 0px 20px 0px;
-    background-color: lightblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#add-title, #add-author {
+    width: 300px;
+}
+
+#add-pages {
+    width: 50px;
 }
 
 footer {
@@ -117,9 +134,20 @@ button:active {
 /* MODIFIERS */
 
 .inline-wrapper {
+    width: 100%;
     margin: 0;
     padding: 0;
-    display: inline-block;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.mgn-btm-5 {
+    margin-bottom: 5px;
+}
+
+.mgn-btm-10 {
+    margin-bottom: 10px;
 }
 
 /* ACCORDION */
@@ -135,13 +163,7 @@ button:active {
 }
   
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-button.active {
+.accordion.active {
     box-shadow: inset 0px 0px 5px -2px black;
-}
-  
-/* Style the accordion panel. Note: hidden by default */
-.panel {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.2s ease-out;
+    background-color: rgb(126, 126, 126);
 }
