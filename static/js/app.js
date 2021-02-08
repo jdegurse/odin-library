@@ -207,3 +207,11 @@ for (i = 0; i < acc.length; i++) {
 createTable()
 
 document.getElementById('add-submit').addEventListener('click', submitClick);
+document.getElementById('required-field-warning')
+    .addEventListener('click', function () {
+        this.classList.toggle('hidden')
+    });
+document.getElementById('pages-number-warning')
+    .addEventListener('click', function () {
+        this.classList.toggle('hidden')
+    });
