@@ -70,6 +70,14 @@ p {
     font-weight: normal;
 }
 
+a {
+    color: orangered;
+}
+
+a:hover {
+    color: yellowgreen;
+}
+
 table {
     width: 100%;
 }
